@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/gnclmorais/bookshelf/issues"
   },
-  "homepage": "https://github.com/gnclmorais/bookshelf#readme"
+  "homepage": "https://github.com/gnclmorais/bookshelf#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
