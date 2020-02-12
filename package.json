@@ -4,7 +4,8 @@
   "description": "What I’ve read so far.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "homepage": "https://github.com/gnclmorais/bookshelf#readme",
   "dependencies": {
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
   }
 }
