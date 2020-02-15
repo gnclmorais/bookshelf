@@ -1,11 +1,11 @@
 // Get access to credentials
 require('dotenv').config()
 
-// Make HTTP requests
 const superagent = require('superagent')
-
-// Parse XML into JSON
 const parser = require('xml2json')
+const pug = require('pug')
+const R = require('ramda')
+var fs = require('fs')
 
 // Utils
 const goodreadsUser = (userId) => {
@@ -13,6 +13,9 @@ const goodreadsUser = (userId) => {
 }
 const goodreadsShelf = () => {
   return 'https://www.goodreads.com/review/list'
+}
+const yearMonthDay = (date) => {
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
 const [key, user] = [process.env.GOODREADS_KEY, process.env.GOODREADS_USER]
@@ -63,13 +66,69 @@ const _notAnonymous = (async () => {
       console.log('end, total', end, total)
 
       // start, end and total come as strings, so cast we must
-    } while (Number(end) < Number(total))
+    // } while (Number(end) < Number(total))
+    } while (1 > 2) // TODO remove
 
-    console.log('start', start)
-    console.log('end', end)
-    console.log('total', total)
-    console.log('books.length', books.length)
-    console.log('books', books)
+    // console.log('start', start)
+    // console.log('end', end)
+    // console.log('total', total)
+    // console.log('books.length', books.length)
+    // console.log('books', books)
+
+    // shape of an author
+    // console.log('author:::', books[0].book.authors)
+    const getName = R.pluck('name')
+    const getAuthorsNames = R.compose(R.values, getName)
+    // const authorsNames = getAuthorsNames(books[0].book.authors)
+
+
+
+    // console.log('::: book', books[0].book)
+    // console.log('::: book id', books[0].book.id)
+    // console.log('::: book authors', books[0].book.authors)
+
+
+
+    const validIsbnOrNothing = maybeIsbn => {
+      return isNaN(Number(maybeIsbn)) ? null : maybeIsbn
+    }
+
+    // relevant book structure:
+    const bookDigest = (bookObj) => {
+      const book = bookObj.book
+
+      console.log('book.isbn', book.isbn)
+
+      return ({
+        id: book.id.$t,
+        isbn: validIsbnOrNothing(book.isbn),
+        title: book.title,
+        title_without_series: book.title_without_series,
+        image_url: book.image_url,
+        link: book.link,
+        rating: bookObj.rating,
+        authors: getAuthorsNames(book.authors)
+      })
+    }
+
+    const booksDigest = R.map(bookDigest, books)
+    // console.log('booksDigest', booksDigest)
+
+    const html = pug.renderFile('views/index.pug', {
+      // variables
+      books: booksDigest,
+      timestamp: yearMonthDay(new Date()),
+      // pug config
+      self: true,
+      pretty: true
+    })
+    console.log(html)
+
+    fs.writeFile('public/index.html', html, function (err) {
+      if (err) return console.log(err)
+
+      console.log('The file was saved!')
+    })
   } catch (err) {
     console.log('Error:', err)
   }

@@ -1,0 +1,20 @@
+include _book.pug
+
+doctype html
+html(lang="en")
+  head
+    title Bookshelf
+  body
+    header
+      h1 Pug - node template engine
+    main
+      p.
+        This is a collection of what I’ve been reading on the past years.
+        Automatically fetched from Goodreads.
+        Books tagged with ⭐️ are strong recommendations.
+      ul
+        each book in self.books
+          +book(book)
+    footer
+      | Last rendered at
+      time(datetime=self.timestamp)= self.timestamp

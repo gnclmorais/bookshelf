@@ -1,0 +1,6 @@
+mixin book(book)
+  li.book(data-rating=book.rating)
+    a(href=book.link data-isbn=book.isbn) #{book.title}
+    | by
+    each author in book.authors
+      span.author= author
