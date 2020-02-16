@@ -3,18 +3,49 @@ include _book.pug
 doctype html
 html(lang="en")
   head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='Some description')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
     title Bookshelf
+
+    link(
+      href='https://fonts.googleapis.com/css?family=Lora&display=swap'
+      rel='stylesheet'
+    )
+    link(
+      href='https://fonts.googleapis.com/css?family=Chivo:700i&display=swap'
+      rel='stylesheet'
+    )
+    style
+      include ../stylesheets/style.css
   body
     header
-      h1 Pug - node template engine
+      h1 My bookshelf
     main
-      p.
-        This is a collection of what I’ve been reading on the past years.
-        Automatically fetched from Goodreads.
-        Books tagged with ⭐️ are strong recommendations.
-      ul
-        each book in self.books
-          +book(book)
+      p
+        | This is a collection of what I’ve read
+        sup
+          a#r1(href="#fn1") [1]
+        | over the past years, automatically generated from my
+        |
+        a(href="https://goodreads.com/gnclmorais") Goodreads profile
+        | .
+        | Last updated on
+        time.timestamp(datetime=self.timestamp)= self.timestamp
+        | .
+      each yearAndBook in self.booksPerYear
+        - var year = yearAndBook[0]
+        - var books = yearAndBook[1]
+        h2= year
+        ul
+          each book in books
+            +book(book)
+      section
+        p#fn1
+          a(href="#r1") [1]
+          | Read or listened; audiobooks are great companions for long runs
+          | and I find them in some ways superior to paper books.
     footer
-      | Last rendered at
-      time(datetime=self.timestamp)= self.timestamp
+      | Footer

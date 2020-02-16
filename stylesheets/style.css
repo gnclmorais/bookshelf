@@ -1,0 +1,29 @@
+:root {
+  --font-size-base: 18px;
+  --font-colour-body: #1d2d35;
+  --max-width: 800px;
+}
+
+body {
+  font-family: 'Lora', serif;
+  font-size: var(--font-size-base);
+  color: var(--font-colour-body);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+h1,
+h2 {
+  font-family: 'Chivo', serif;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li:nth-child(2n+1) {
+  background-color: lightgrey;
+}

@@ -7,87 +7,56 @@ const pug = require('pug')
 const R = require('ramda')
 var fs = require('fs')
 
-// Utils
-const goodreadsUser = (userId) => {
-  return `https://www.goodreads.com/user/show/${userId}.xml`
-}
-const goodreadsShelf = () => {
-  return 'https://www.goodreads.com/review/list'
-}
+// 'Get the books on a members shelf'
+// https://goodreads.com/api/index#reviews.list
 const yearMonthDay = (date) => {
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
-const [key, user] = [process.env.GOODREADS_KEY, process.env.GOODREADS_USER]
-let url = goodreadsUser(user)
+const goodreadsKey = process.env.GOODREADS_KEY
+const goodreadsUser = process.env.GOODREADS_USER
+const goodreadsShelf = process.env.GOODREADS_SHELF
+const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
 
 const _notAnonymous = (async () => {
   try {
-    let res = await superagent.get(url).query({ key }).accept('xml')
-    let body = JSON.parse(parser.toJson(res.body.toString('utf8')))
+    let currentPage = 1
+    const resultsPerPage = 20 // default 20, can go up to 200
 
-    let shelves
-    try {
-      shelves = body.GoodreadsResponse.user.user_shelves.user_shelf
-    } catch (err) {
-      console.log('Error finding bookshelves:', err)
-    }
-
-    const readShelf = shelves.filter(shelf => shelf.name === process.env.GOODREADS_SHELF)[0]
-    const readShelfId = readShelf.id.$t // this might not be needed, name is enough
-
+    let res, body, response, shelf
     let books = []
-    let start, end, total
-    const perPage = 20
-    let page = 1
-    let response, shelf
+    let end, total
 
     do {
-      url = goodreadsShelf()
-      res = await superagent.get(url).query({
-        key,
+      res = await superagent.get(goodreadsUrlShelf).query({
+        key: goodreadsKey,
+        id: goodreadsUser,
+        shelf: goodreadsShelf,
         v: 2,
-        id: user,
-        shelf: 'read',
-        page,
-        per_page: perPage
+        page: currentPage,
+        per_page: resultsPerPage
       }).accept('xml')
 
       body = JSON.parse(parser.toJson(res.body.toString('utf8')))
       response = body.GoodreadsResponse
 
-      shelf = response.reviews;
-      ({ start, end, total } = shelf)
-      page += 1
-
-      // 'review' is where book objects are
+      shelf = response.reviews
       books = books.concat(shelf.review)
 
-      console.log('end, total', end, total)
+      books.forEach(book => {
+        if (book.book.title === 'Rework') {
+          console.log('Rework:::', book)
+        }
+      })
 
-      // start, end and total come as strings, so cast we must
-    // } while (Number(end) < Number(total))
-    } while (1 > 2) // TODO remove
+      ;({ end, total } = shelf)
+      currentPage += 1
 
-    // console.log('start', start)
-    // console.log('end', end)
-    // console.log('total', total)
-    // console.log('books.length', books.length)
-    // console.log('books', books)
+      // `end` and `total` are strings, so cast them we must
+    } while (Number(end) < Number(total))
 
-    // shape of an author
-    // console.log('author:::', books[0].book.authors)
     const getName = R.pluck('name')
     const getAuthorsNames = R.compose(R.values, getName)
-    // const authorsNames = getAuthorsNames(books[0].book.authors)
-
-
-
-    // console.log('::: book', books[0].book)
-    // console.log('::: book id', books[0].book.id)
-    // console.log('::: book authors', books[0].book.authors)
-
-
 
     const validIsbnOrNothing = maybeIsbn => {
       return isNaN(Number(maybeIsbn)) ? null : maybeIsbn
@@ -97,7 +66,23 @@ const _notAnonymous = (async () => {
     const bookDigest = (bookObj) => {
       const book = bookObj.book
 
-      console.log('book.isbn', book.isbn)
+      // read_at: 'Sun Jan 01 00:00:00 -0800 2012',
+      // date_added: 'Mon Aug 27 14:56:13 -0700 2012',
+      // const date = bookObj.read_at || bookObj.date_added
+      // R.is(String, bookObj.read_at) ? bookObj.read_at
+
+      const findDate = R.ifElse(
+        R.compose(R.is(String), R.prop('read_at')),
+        R.prop('read_at'),
+        R.prop('date_added')
+      )
+      const date = findDate(bookObj)
+
+
+      console.log('bookObj:::', bookObj)
+      console.log(date)
+      console.log(typeof date)
+      const yearRead = date ? Number(date.slice(-4)) : null
 
       return ({
         id: book.id.$t,
@@ -107,22 +92,35 @@ const _notAnonymous = (async () => {
         image_url: book.image_url,
         link: book.link,
         rating: bookObj.rating,
-        authors: getAuthorsNames(book.authors)
+        authors: getAuthorsNames(book.authors),
+        year: yearRead
       })
     }
 
+    // [{ year: 2001, … }, { year: 2000, … }, …]
     const booksDigest = R.map(bookDigest, books)
-    // console.log('booksDigest', booksDigest)
+
+    // { 2000: [{ year: 2000, … }, …], 2001: [{ year: 2001, … }, …], … }
+    const booksByYear = R.groupBy(R.prop('year'))(booksDigest)
+
+    // [[2000: [{ year: 2000, … }, …]], [2001: [{ year: 2001, … }, …]], …]
+    const booksInArray = R.toPairs(booksByYear)
+
+    // [[2001: [{ year: 2001, … }, …]], [2000: [{ year: 2000, … }, …]], …]
+    const sortedFromNewestToOldest = R.sort(R.descend(R.prop(0)))
+    const sortedBooks = sortedFromNewestToOldest(booksInArray)
+
+    console.log('booksDigest :::', booksDigest)
 
     const html = pug.renderFile('views/index.pug', {
       // variables
-      books: booksDigest,
+      booksPerYear: sortedBooks,
       timestamp: yearMonthDay(new Date()),
       // pug config
       self: true,
       pretty: true
     })
-    console.log(html)
+    // console.log(html)
 
     fs.writeFile('public/index.html', html, function (err) {
       if (err) return console.log(err)
