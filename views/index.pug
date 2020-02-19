@@ -27,10 +27,11 @@ html(lang="en")
       p
         | This is a collection of what I’ve read
         sup
-          a#r1(href="#fn1") [1]
+          a.footnotes__link#r1(href="#fn1") [1]
+        |
         | over the past years, automatically generated from my
         |
-        a(href="https://goodreads.com/gnclmorais") Goodreads profile
+        a.highlight(href="https://goodreads.com/gnclmorais") Goodreads profile
         | .
         | Last updated on
         time.timestamp(datetime=self.timestamp)= self.timestamp
@@ -42,10 +43,22 @@ html(lang="en")
         ul
           each book in books
             +book(book)
-      section
+
+      section.footnotes
         p#fn1
-          a(href="#r1") [1]
+          a.footnotes__link(href="#r1") [1]
+          |
           | Read or listened; audiobooks are great companions for long runs
           | and I find them in some ways superior to paper books.
-    footer
-      | Footer
+
+    footer.footer
+      a.footer__link(href="https://blog.gnclmorais.com") Blog
+      | ,
+      |
+      a.footer__link(href="https://github.com/gnclmorais") GitHub
+      | ,
+      |
+      a.footer__link(href="https://twitter.com/gnclmorais") Twitter
+
+      a.footer__link.pull-right(href="https://github.com/gnclmorais/bookshelf")
+        | Check out the code

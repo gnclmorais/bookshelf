@@ -1,6 +1,6 @@
 mixin book(book)
   li.book(data-rating=book.rating data-isbn=book.isbn)
-    a(href=book.link)= book.title_without_series
+    a.highlight(href=book.link)= book.title_without_series
     |
     |
     span.by by

@@ -1,7 +1,8 @@
 :root {
-  --font-size-base: 18px;
-  --font-colour-body: #1d2d35;
+  --font-size-base: 20px;
+  --font-colour-body: teal;
   --max-width: 800px;
+  --marker-colour: pink;
 }
 
 body {
@@ -18,12 +19,93 @@ h2 {
   font-family: 'Chivo', serif;
 }
 
+h2 {
+  margin: 2rem 0 0.5em;
+}
+
+p {
+  line-height: 2rem;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li:nth-child(2n+1) {
-  background-color: lightgrey;
+@media screen and (max-width: 900px) {
+  li {
+    margin-left: 25px;
+  }
+}
+li[data-rating="5"] {
+  position: relative;
+}
+li[data-rating="5"]::before {
+  position: absolute;
+  color: var(--font-colour-body);
+  content: '☛';
+  color: var(--marker-colour);
+  left: -25px;
+  top: -1px;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+.by,
+.author {
+  color: grey;
+}
+
+.highlight {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  /* https://speckyboy.com/underline-text-effects-css */
+  background-image: linear-gradient(var(--marker-colour), var(--marker-colour));
+  background-repeat: no-repeat;
+  background-size: 100% 0.1em;
+  background-position: 0 88%;
+  transition: background-size 0.2s ease-in;
+}
+.highlight:hover {
+  background-size: 100% 88%;
+}
+
+.footnotes {
+  margin: 3rem 0;
+  position: relative;
+}
+.footnotes::before {
+  content: '☙';
+  display: block;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 5rem 0;
+}
+
+.footnotes__link,
+.footnotes__link:visited {
+  color: grey;
+  text-decoration: none;
+}
+.footnotes__link:hover {
+  color: var(--marker-colour);
+}
+
+.footer {
+  font-family: 'Chivo', serif;
+  margin: 5rem 0 3rem;
+  color: var(--marker-colour);
+}
+
+.footer__link {
+  color: var(--font-colour-body);
+}
+
+.pull-right {
+  float: right;
 }
