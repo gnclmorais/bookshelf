@@ -17,6 +17,11 @@ I’ve looked into a few tools to put this together, but I soon realised that no
 - [GitHub Actions](https://github.com/features/actions), so this project can tap into this new feature to generate the required [static page][1].
 
 
+## Future plans
+- [ ] Change the GitHub Action from running on push to running every Monday
+- [ ] Put this GitHub Page under https://bookshelf.gnclmorais.com
+
+
 ## Resources
 - [sdras/awesome-actions][3]
 - [Storing Weather Data Daily using GitHub Actions][4]
