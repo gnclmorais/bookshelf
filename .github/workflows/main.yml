@@ -22,9 +22,25 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build --if-present
-    - name: Updates bookshelf based on Goodreads data
+    - name: Creates a bookshelf based on Goodreads data
       run: npm start
       env:
         GOODREADS_KEY: ${{ secrets.GOODREADS_KEY }}
         GOODREADS_USER: ${{ secrets.GOODREADS_USER }}
         GOODREADS_SHELF: ${{ secrets.GOODREADS_SHELF }}
+    - name: Commits generated bookshelf to GitHub pages
+      env:
+        GIT_OWNER_EMAIL: ${{ secrets.GIT_OWNER_EMAIL }}
+        GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+      run: |
+        git config user.email "$GIT_OWNER_EMAIL"
+        git config user.name "gnclmorais"
+        if [[ `git status --porcelain` ]]; then
+          git add .
+          git commit -a -m "Update bookshelf at `date +'%Y-%m-%d'`"
+          git remote rm origin
+          git remote add origin https://gnclmorais:$GITHUB_PUSH_TOKEN@github.com/gnclmorais/bookshelf.git
+          git push origin HEAD:gh-pages
+        else
+          echo 'unable to detech changes'
+        fi
