@@ -40,7 +40,7 @@ jobs:
           git commit -a -m "Update bookshelf at `date +'%Y-%m-%d'`"
           git remote rm origin
           git remote add origin https://gnclmorais:$GITHUB_PUSH_TOKEN@github.com/gnclmorais/bookshelf.git
-          git push origin HEAD:gh-pages
+          git push --force origin HEAD:gh-pages
         else
           echo 'unable to detech changes'
         fi
