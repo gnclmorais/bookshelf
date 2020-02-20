@@ -21,7 +21,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
 const _notAnonymous = (async () => {
   try {
     let currentPage = 1
-    const resultsPerPage = 20 // default 20, can go up to 200
+    const resultsPerPage = 200 // default 20, can go up to 200
 
     let res, body, response, shelf
     let books = []
@@ -65,23 +65,12 @@ const _notAnonymous = (async () => {
     // relevant book structure:
     const bookDigest = (bookObj) => {
       const book = bookObj.book
-
-      // read_at: 'Sun Jan 01 00:00:00 -0800 2012',
-      // date_added: 'Mon Aug 27 14:56:13 -0700 2012',
-      // const date = bookObj.read_at || bookObj.date_added
-      // R.is(String, bookObj.read_at) ? bookObj.read_at
-
       const findDate = R.ifElse(
         R.compose(R.is(String), R.prop('read_at')),
         R.prop('read_at'),
         R.prop('date_added')
       )
       const date = findDate(bookObj)
-
-
-      console.log('bookObj:::', bookObj)
-      console.log(date)
-      console.log(typeof date)
       const yearRead = date ? Number(date.slice(-4)) : null
 
       return ({
@@ -120,7 +109,6 @@ const _notAnonymous = (async () => {
       self: true,
       pretty: true
     })
-    // console.log(html)
 
     fs.writeFile('index.html', html, function (err) {
       if (err) return console.log(err)
