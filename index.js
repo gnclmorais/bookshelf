@@ -122,7 +122,7 @@ const _notAnonymous = (async () => {
     })
     // console.log(html)
 
-    fs.writeFile('public/index.html', html, function (err) {
+    fs.writeFile('index.html', html, function (err) {
       if (err) return console.log(err)
 
       console.log('The file was saved!')
