@@ -44,10 +44,9 @@ li[data-rating="5"] {
 li[data-rating="5"]::before {
   position: absolute;
   color: var(--font-colour-body);
-  content: '☛';
+  content: '➺';
   color: var(--marker-colour);
   left: -25px;
-  top: -1px;
 }
 
 li + li {
