@@ -18,6 +18,7 @@ I’ve looked into a few tools to put this together, but I soon realised that no
 
 
 ## Future plans
+- [ ] Scope Google Fonts to specific chars ([source](https://twitter.com/addyosmani/status/1229344737724784640))
 - [ ] Change the GitHub Action from running on push to running every Monday
 - [ ] Put this GitHub Page under https://bookshelf.gnclmorais.com
 
