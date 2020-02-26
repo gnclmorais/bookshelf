@@ -17,6 +17,23 @@ I’ve looked into a few tools to put this together, but I soon realised that no
 - [GitHub Actions](https://github.com/features/actions), so this project can tap into this new feature to generate the required [static page][1].
 
 
+## Run this project
+
+```bash
+npm install
+npm start
+```
+**Before** running the application, make sure you have these variables set (you can use a `.env` file for it, since I’m using [`dotenv`](https://github.com/motdotla/dotenv)):
+- `GOODREADS_KEY`  
+  As usual for APIs, you’ll need a [Goodreads key](https://www.goodreads.com/api/keys)
+- `GOODREADS_SHELF`  
+  A string of the shelf you walk to look at (mine’s `'read'`)
+- `GOODREADS_USER`  
+  Whenever you’re on your Goodreads profile, your ID will be the numeric part at `https://www.goodreads.com/user/show/12345678-something`
+
+Check `package.json` for all the available commands, under the `"scripts"` key.
+
+
 ## Future plans
 - [ ] Scope Google Fonts to specific chars ([source](https://twitter.com/addyosmani/status/1229344737724784640))
 - [ ] Change the GitHub Action from running on push to running every Monday
