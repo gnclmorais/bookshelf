@@ -32,9 +32,14 @@ html(lang="en")
         | over the past years, automatically generated from my
         |
         a.highlight(href="https://goodreads.com/gnclmorais") Goodreads profile
-        | .
+        | . Entries indicated by
+        |
+        span.marker-highlight ➺
+        |
+        | are books I strongly advise.
+      p
         | Last updated on
-        time.timestamp(datetime=self.timestamp)= self.timestamp
+        time.timestamp.marker-highlight(datetime=self.timestamp)= self.timestamp
         | .
       each yearAndBook in self.booksPerYear
         - var year = yearAndBook[0]
