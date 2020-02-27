@@ -45,6 +45,7 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 - [Storing Weather Data Daily using GitHub Actions][4]
 - [GitHub: Using environment variables][5]
 - [GitHub: Events that trigger workflows][6]
+- [crontab guru][7]
 
 
 [0]: https://frankchimero.com/reading/
@@ -54,3 +55,4 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 [4]: https://codeburst.io/storing-weather-data-daily-using-github-actions-c2b0ed513ca6
 [5]: https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
 [6]: https://help.github.com/en/actions/reference/events-that-trigger-workflows
+[7]: https://crontab.guru
