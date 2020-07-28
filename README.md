@@ -37,7 +37,7 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 ## Future plans
 - [ ] Scope Google Fonts to specific chars ([source](https://twitter.com/addyosmani/status/1229344737724784640))
 - [ ] Change the GitHub Action from running on push to running every Monday
-- [ ] Put this GitHub Page under https://bookshelf.gnclmorais.com
+- [x] Put this GitHub Page under https://bookshelf.gnclmorais.com
 
 
 ## Resources
