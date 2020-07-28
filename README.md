@@ -38,6 +38,7 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 - [x] Scope Google Fonts to specific chars ([source][8]
 - [x] Change the GitHub Action from running on push to running every Monday
 - [x] Put this GitHub Page under https://bookshelf.gnclmorais.com
+- [ ] Title filter to allow display of shorter, more custom titles
 
 
 ## Resources
