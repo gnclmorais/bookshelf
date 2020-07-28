@@ -35,7 +35,7 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 
 
 ## Future plans
-- [ ] Scope Google Fonts to specific chars ([source](https://twitter.com/addyosmani/status/1229344737724784640))
+- [x] Scope Google Fonts to specific chars ([source][8]
 - [x] Change the GitHub Action from running on push to running every Monday
 - [x] Put this GitHub Page under https://bookshelf.gnclmorais.com
 
@@ -56,3 +56,4 @@ Check `package.json` for all the available commands, under the `"scripts"` key.
 [5]: https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
 [6]: https://help.github.com/en/actions/reference/events-that-trigger-workflows
 [7]: https://crontab.guru
+[8]: https://twitter.com/addyosmani/status/1229344737724784640
