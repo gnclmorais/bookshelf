@@ -3,9 +3,9 @@ name: CI
 on:
   schedule:
     # Run at 2 AM UTC every day
-    - cron: 0 2 * * *
+    # - cron: 0 2 * * *
     # Run at 2 AM UTC every Monday
-    # - cron: 0 2 * * 1
+    - cron: 0 2 * * 1
 
 jobs:
   build:
