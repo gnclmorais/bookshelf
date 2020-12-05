@@ -1,10 +1,11 @@
 {
   "name": "bookshelf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "What I’ve read so far.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "serve": "npx serve . && open index.html",
     "lint": "standard"
   },
   "repository": {
