@@ -10,14 +10,35 @@ html(lang="en")
 
     title Bookshelf
 
+    //- The following Google Fonts async technique comes from @csswizardry:
+    //- https://csswizardry.com/2020/05/the-fastest-google-fonts/#google-fonts-async-snippet
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
     link(
-      href='https://fonts.googleapis.com/css?family=Chivo:700i&display=swap&text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code'
-      rel='stylesheet'
+      rel='preload'
+      as='style'
+      href='https://fonts.googleapis.com/css?family=Chivo:700i&display=swap&text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&display=swap'
     )
     link(
+      rel='preload'
+      as='style'
       href='https://fonts.googleapis.com/css?family=Lora&display=swap'
-      rel='stylesheet'
     )
+    link(
+      rel='stylesheet'
+      href='https://fonts.googleapis.com/css?family=Chivo:700i&display=swap&text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&display=swap'
+      media='print'
+      onload='this.media="all"'
+    )
+    link(
+      rel='stylesheet'
+      href='https://fonts.googleapis.com/css?family=Lora&display=swap'
+      media='print'
+      onload='this.media="all"'
+    )
+    noscript
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Chivo:700i&display=swap&text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&display=swap')
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lora&display=swap')
+
     style
       include ../stylesheets/style.css
   body
