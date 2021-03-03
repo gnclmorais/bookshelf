@@ -24,7 +24,7 @@
   "homepage": "https://github.com/gnclmorais/bookshelf#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "ramda": "^0.27.0",
     "superagent": "^5.2.1",
     "xml2json": "^0.12.0"
