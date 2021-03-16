@@ -5,7 +5,7 @@ const superagent = require('superagent')
 const parser = require('xml2json')
 const pug = require('pug')
 const R = require('ramda')
-var fs = require('fs')
+const fs = require('fs')
 
 // 'Get the books on a members shelf'
 // https://goodreads.com/api/index#reviews.list
@@ -18,7 +18,7 @@ const goodreadsUser = process.env.GOODREADS_USER
 const goodreadsShelf = process.env.GOODREADS_SHELF
 const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
 
-const _notAnonymous = (async () => {
+;(async () => {
   try {
     let currentPage = 1
     const resultsPerPage = 200 // default 20, can go up to 200
