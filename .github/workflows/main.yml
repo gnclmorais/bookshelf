@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   schedule:
     # Run at 2 AM UTC every day
     # - cron: 0 2 * * *
