@@ -36,6 +36,7 @@ jobs:
       run: |
         git config user.email "$GIT_OWNER_EMAIL"
         git config user.name "gnclmorais"
+        git status --porcelain
         if [[ `git status --porcelain` ]]; then
           git add .
           git commit -a -m "Update bookshelf at `date +'%Y-%m-%d'`"
@@ -43,5 +44,5 @@ jobs:
           git remote add origin https://gnclmorais:$GITHUB_PUSH_TOKEN@github.com/gnclmorais/bookshelf.git
           git push --force origin HEAD:gh-pages
         else
-          echo 'unable to detech changes'
+          echo 'Unable to detect changes'
         fi
