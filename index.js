@@ -43,12 +43,6 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
       shelf = response.reviews
       books = books.concat(shelf.review)
 
-      books.forEach(book => {
-        if (book.book.title === 'Rework') {
-          console.log('Rework:::', book)
-        }
-      })
-
       ;({ end, total } = shelf)
       currentPage += 1
 
