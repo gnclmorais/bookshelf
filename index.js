@@ -45,6 +45,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
 
       ;({ end, total } = shelf)
       currentPage += 1
+      console.log(`end: ${end}, total: ${total}`)
 
       // `end` and `total` are strings, so cast them we must
     } while (Number(end) < Number(total))
@@ -93,7 +94,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
     const sortedFromNewestToOldest = R.sort(R.descend(R.prop(0)))
     const sortedBooks = sortedFromNewestToOldest(booksInArray)
 
-    console.log('booksDigest :::', booksDigest)
+    console.log(`Digest composed of ${booksDigest.length} books`)
 
     const html = pug.renderFile('views/index.pug', {
       // variables
