@@ -21,7 +21,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
 ;(async () => {
   try {
     let currentPage = 1
-    const resultsPerPage = 200 // default 20, can go up to 200
+    const resultsPerPage = 100 // default 20, can go up to 100
 
     let res, body, response, shelf
     let books = []
