@@ -91,6 +91,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
     const booksInArray = R.toPairs(booksByYear)
 
     // [[2001: [{ year: 2001, … }, …]], [2000: [{ year: 2000, … }, …]], …]
+    // Yes, this is still an array and not an object, because of key order
     const sortedFromNewestToOldest = R.sort(R.descend(R.prop(0)))
     const sortedBooks = sortedFromNewestToOldest(booksInArray)
 

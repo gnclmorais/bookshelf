@@ -65,8 +65,7 @@ html(lang="en")
         time.timestamp.marker-highlight(datetime=self.timestamp)= self.timestamp
         | .
       each yearAndBook in self.booksPerYear
-        - var year = yearAndBook[0]
-        - var books = yearAndBook[1]
+        - const [year, books] = yearAndBook
         h2= year
         ul
           each book in books
