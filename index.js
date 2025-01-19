@@ -9,8 +9,13 @@ const fs = require('fs')
 
 // 'Get the books on a members shelf'
 // https://goodreads.com/api/index#reviews.list
+
 const yearMonthDay = (date) => {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate()
+
+  return `${year}-${month}-${day}`
 }
 
 const goodreadsKey = process.env.GOODREADS_KEY
