@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Some description">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bookshelf</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📚&lt;/text&gt;&lt;/svg&gt;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Chivo:700i&amp;display=swap&amp;text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&amp;display=swap">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lora&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo:700i&amp;display=swap&amp;text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&amp;display=swap" media="print" onload="this.media=&quot;all&quot;">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora&amp;display=swap" media="print" onload="this.media=&quot;all&quot;">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo:700i&amp;display=swap&amp;text=My%20bookshelf1234567890Blog,GitHub,TwitterCheck%20out%20the%20code&amp;display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora&amp;display=swap">
+    </noscript>
+    <style>:root {
+  --font-size-base: 20px;
+  --font-colour-body: teal;
+  --max-width: 800px;
+  --marker-colour: pink;
+}
+
+body {
+  font-family: 'Lora', serif;
+  font-size: var(--font-size-base);
+  font-display: fallback;
+  color: var(--font-colour-body);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+h1,
+h2 {
+  font-family: 'Chivo', serif;
+}
+
+h2 {
+  margin: 2rem 0 0.5em;
+}
+
+p {
+  line-height: 2rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 900px) {
+  li {
+    margin-left: 25px;
+  }
+}
+li[data-rating="5"] {
+  position: relative;
+}
+li[data-rating="5"]::before {
+  position: absolute;
+  color: var(--font-colour-body);
+  content: '➺';
+  color: var(--marker-colour);
+  left: -25px;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+.by,
+.author {
+  color: grey;
+}
+
+.highlight {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  /* https://speckyboy.com/underline-text-effects-css */
+  background-image: linear-gradient(var(--marker-colour), var(--marker-colour));
+  background-repeat: no-repeat;
+  background-size: 100% 0.1em;
+  background-position: 0 88%;
+  transition: background-size 0.2s ease-in;
+}
+.highlight:hover {
+  background-size: 100% 88%;
+}
+
+.footnotes {
+  margin: 3rem 0;
+  position: relative;
+}
+.footnotes::before {
+  content: '☙';
+  display: block;
+  color: var(--marker-colour);
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 5rem 0;
+}
+
+.footnotes__link,
+.footnotes__link:visited {
+  color: grey;
+  text-decoration: none;
+}
+.footnotes__link:hover {
+  color: var(--marker-colour);
+}
+
+.footer {
+  font-family: 'Chivo', serif;
+  margin: 5rem 0 3rem;
+  color: var(--marker-colour);
+}
+
+.footer__link {
+  color: var(--font-colour-body);
+}
+
+/** Utils */
+
+.pull-right {
+  float: right;
+}
+
+.marker-highlight {
+  color: var(--marker-colour);
+}
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My bookshelf</h1>
+    </header>
+    <main>
+      <p>This is a collection of what I’ve read<sup><a class="footnotes__link" id="r1" href="#fn1">[1]</a></sup>
+        over the past years, automatically generated from my
+        <a class="highlight" href="https://goodreads.com/gnclmorais">Goodreads profile</a>. Entries indicated by
+        <span class="marker-highlight">➺</span>
+        are books I strongly advise.
+      </p>
+      <p>Last updated on
+        <time class="timestamp marker-highlight" datetime="2025-01-27">2025-01-27</time>.
+      </p>
+      <h2>2024</h2>
+      <ul>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/56997093-the-body">The Body: A Guide for Occupants</a>
+          <span class="by">by</span>
+          <span class="author">Bill Bryson</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1784704008"><a class="highlight" href="https://www.goodreads.com/book/show/58261060-four-thousand-weeks">Four Thousand Weeks: Time Management for Mortals</a>
+          <span class="by">by</span>
+          <span class="author">Oliver Burkeman</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1534345930"><a class="highlight" href="https://www.goodreads.com/book/show/29237226-saga-volume-11">Saga, Volume 11</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/131183856-do-good-get-paid">Do Good, Get Paid: How to Make a Difference in Your Day Job</a>
+          <span class="by">by</span>
+          <span class="author">Natalie Fee</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1786277662"><a class="highlight" href="https://www.goodreads.com/book/show/53916481-how-to-save-the-world-for-free">How to Save the World For Free</a>
+          <span class="by">by</span>
+          <span class="author">Natalie Fee</span>
+        </li>
+        <li class="book" data-rating="2"><a class="highlight" href="https://www.goodreads.com/book/show/19289471-the-expectant-dad-s-survival-guide">The Expectant Dad&amp;apos;s Survival Guide: Everything You Need to Know</a>
+          <span class="by">by</span>
+          <span class="author">Rob  Kemp</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="345816021"><a class="highlight" href="https://www.goodreads.com/book/show/30257963-12-rules-for-life">12 Rules for Life: An Antidote to Chaos</a>
+          <span class="by">by</span>
+          <span class="author">Jordan B. Peterson</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1593155824"><a class="highlight" href="https://www.goodreads.com/book/show/8112865-no-excuses">No Excuses!: The Power of Self-Discipline</a>
+          <span class="by">by</span>
+          <span class="author">Brian Tracy</span>
+        </li>
+      </ul>
+      <h2>2023</h2>
+      <ul>
+        <li class="book" data-rating="3" data-isbn="1473663172"><a class="highlight" href="https://www.goodreads.com/book/show/40104464-baby-food-matters">Baby Food Matters: What science says about how to give your child healthy eating habits for life</a>
+          <span class="by">by</span>
+          <span class="author">Clare Llewellyn</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1534323341"><a class="highlight" href="https://www.goodreads.com/book/show/29237224-saga-volume-10">Saga, Volume 10</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1784754773"><a class="highlight" href="https://www.goodreads.com/book/show/35103154-how-not-to-hate-your-husband-after-kids">How Not To Hate Your Husband After Kids</a>
+          <span class="by">by</span>
+          <span class="author">Jancee Dunn</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="525559256"><a class="highlight" href="https://www.goodreads.com/book/show/40121328-cribsheet">Cribsheet: A Data-Driven Guide to Better, More Relaxed Parenting, from Birth to Preschool</a>
+          <span class="by">by</span>
+          <span class="author">Emily Oster</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1409177920"><a class="highlight" href="https://www.goodreads.com/book/show/41582132-expecting-better">Expecting Better: Why the Conventional Pregnancy Wisdom is Wrong and What You Really Need to Know</a>
+          <span class="by">by</span>
+          <span class="author">Emily Oster</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1473231078"><a class="highlight" href="https://www.goodreads.com/book/show/50126182-blood-of-elves">Blood of Elves</a>
+          <span class="by">by</span>
+          <span class="author">Andrzej Sapkowski</span>
+        </li>
+      </ul>
+      <h2>2022</h2>
+      <ul>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/48847165-stillness-is-the-key">Stillness Is the Key</a>
+          <span class="by">by</span>
+          <span class="author">Ryan Holiday</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/50056754-heroes">Heroes: Mortals and Monsters, Quests and Adventures</a>
+          <span class="by">by</span>
+          <span class="author">Stephen Fry</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="718188721"><a class="highlight" href="https://www.goodreads.com/book/show/35074096-mythos">Mythos: The Greek Myths Retold</a>
+          <span class="by">by</span>
+          <span class="author">Stephen Fry</span>
+        </li>
+        <li class="book" data-rating="0"><a class="highlight" href="https://www.goodreads.com/book/show/23395213-how-to-listen-to-and-understand-great-music">How to Listen to and Understand Great Music</a>
+          <span class="by">by</span>
+          <span class="author">Robert Greenberg</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/58983943-the-selfish-gene">The Selfish Gene</a>
+          <span class="by">by</span>
+          <span class="author">Richard Dawkins</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1473630835"><a class="highlight" href="https://www.goodreads.com/book/show/34855853-the-secret-lives-of-colour">The Secret Lives of Colour</a>
+          <span class="by">by</span>
+          <span class="author">Kassia St. Clair</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="735217556"><a class="highlight" href="https://www.goodreads.com/book/show/42041926-the-scout-mindset">The Scout Mindset: Why Some People See Things Clearly and Others Don&amp;apos;t</a>
+          <span class="by">by</span>
+          <span class="author">Julia Galef</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="525572430"><a class="highlight" href="https://www.goodreads.com/book/show/39317186-make-time">Make Time: How to Focus on What Matters Every Day</a>
+          <span class="by">by</span>
+          <span class="author">Jake Knapp</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1594634920"><a class="highlight" href="https://www.goodreads.com/book/show/37424706-the-art-of-gathering">The Art of Gathering: How We Meet and Why It Matters</a>
+          <span class="by">by</span>
+          <span class="author">Priya Parker</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1623365929"><a class="highlight" href="https://www.goodreads.com/book/show/26114603-work-clean">Work Clean: The life-changing power of mise-en-place to organize your life, work, and mind</a>
+          <span class="by">by</span>
+          <span class="author">Dan Charnas</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="804137390"><a class="highlight" href="https://www.goodreads.com/book/show/19776547-essentialism">Essentialism: The Disciplined Pursuit of Less</a>
+          <span class="by">by</span>
+          <span class="author">Greg McKeown</span>
+        </li>
+      </ul>
+      <h2>2021</h2>
+      <ul>
+        <li class="book" data-rating="5" data-isbn="1534303499"><a class="highlight" href="https://www.goodreads.com/book/show/43307890-saga-volume-8">Saga, Volume 8</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/18954141-start-with-why">Start With Why: How Great Leaders Inspire Everyone to Take Action</a>
+          <span class="by">by</span>
+          <span class="author">Simon Sinek</span>
+        </li>
+        <li class="book" data-rating="0" data-isbn="385689454"><a class="highlight" href="https://www.goodreads.com/book/show/33652490-men-without-women">Men Without Women</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/8420679-a-practical-guide-to-information-architecture">A Practical Guide to Information Architecture</a>
+          <span class="by">by</span>
+          <span class="author">Donna Spencer</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="307887898"><a class="highlight" href="https://www.goodreads.com/book/show/10127019-the-lean-startup">The Lean Startup</a>
+          <span class="by">by</span>
+          <span class="author">Eric Ries</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1534308377"><a class="highlight" href="https://www.goodreads.com/book/show/38812872-saga-volume-9">Saga, Volume 9</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1534300600"><a class="highlight" href="https://www.goodreads.com/book/show/29237211-saga-volume-7">Saga, Volume 7</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1632154382"><a class="highlight" href="https://www.goodreads.com/book/show/25451555-saga-volume-5">Saga, Volume 5</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1632150778"><a class="highlight" href="https://www.goodreads.com/book/show/23093367-saga-volume-4">Saga, Volume 4</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1607069318"><a class="highlight" href="https://www.goodreads.com/book/show/19358975-saga-volume-3">Saga, Volume 3</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1607066920"><a class="highlight" href="https://www.goodreads.com/book/show/17131869-saga-volume-2">Saga, Volume 2</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1607066017"><a class="highlight" href="https://www.goodreads.com/book/show/15704307-saga-volume-1">Saga, Volume 1</a>
+          <span class="by">by</span>
+          <span class="author">Brian K. Vaughan</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/39715792-emotional-agility">Emotional Agility: Get Unstuck, Embrace Change, and Thrive in Work and Life</a>
+          <span class="by">by</span>
+          <span class="author">Susan  David</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="340943750"><a class="highlight" href="https://www.goodreads.com/book/show/42381046-mating-in-captivity">Mating in Captivity: Unlocking Erotic Intelligence</a>
+          <span class="by">by</span>
+          <span class="author">Esther Perel</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/44286675-houseplants">Houseplants: A Guide to Choosing and Caring for Indoor Plants</a>
+          <span class="by">by</span>
+          <span class="author">Lisa Eldred Steinkopf</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1465463305"><a class="highlight" href="https://www.goodreads.com/book/show/33346824-how-not-to-kill-your-houseplant">How Not to Kill Your Houseplant: Survival Tips for the Horticulturally Challenged</a>
+          <span class="by">by</span>
+          <span class="author">Veronica Peerless</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="593232348"><a class="highlight" href="https://www.goodreads.com/book/show/56036319-intuitive-fasting">Intuitive Fasting: The Flexible Four-Week Intermittent Fasting Plan to Recharge You Metabolism and Renew Your Health</a>
+          <span class="by">by</span>
+          <span class="author">Will Cole</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1787331369"><a class="highlight" href="https://www.goodreads.com/book/show/50787261-waypoints">Waypoints</a>
+          <span class="by">by</span>
+          <span class="author">Robert  Martineau</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/25073935-nonviolent-communication">Nonviolent Communication: A Language of Life</a>
+          <span class="by">by</span>
+          <span class="author">Marshall B. Rosenberg</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1452171475"><a class="highlight" href="https://www.goodreads.com/book/show/36040514-do-fly">Do Fly: Find Your Way. Make a Living. Be Your Best Self.</a>
+          <span class="by">by</span>
+          <span class="author">Gavin Strange</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="544040546"><a class="highlight" href="https://www.goodreads.com/book/show/15815600-selected-stories-of-philip-k-dick">Selected Stories Of Philip K. Dick</a>
+          <span class="by">by</span>
+          <span class="author">Philip K. Dick</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1787134660"><a class="highlight" href="https://www.goodreads.com/book/show/50897712-super-sourdough">Super Sourdough</a>
+          <span class="by">by</span>
+          <span class="author">James   Morton</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1446608115"><a class="highlight" href="https://www.goodreads.com/book/show/16235435-stoic-spiritual-exercises">Stoic Spiritual Exercises</a>
+          <span class="by">by</span>
+          <span class="author">Elen Buzaré</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="385544413"><a class="highlight" href="https://www.goodreads.com/book/show/41436213-sandworm">Sandworm: A New Era of Cyberwar and the Hunt for the Kremlin&amp;apos;s Most Dangerous Hackers</a>
+          <span class="by">by</span>
+          <span class="author">Andy Greenberg</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="141034599"><a class="highlight" href="https://www.goodreads.com/book/show/2962025-the-black-swan">The Black Swan: The Impact of the Highly Improbable</a>
+          <span class="by">by</span>
+          <span class="author">Nassim Nicholas Taleb</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1953953336"><a class="highlight" href="https://www.goodreads.com/book/show/45303387-an-elegant-puzzle">An Elegant Puzzle: Systems of Engineering Management</a>
+          <span class="by">by</span>
+          <span class="author">Will Larson</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1427283141"><a class="highlight" href="https://www.goodreads.com/book/show/40512135-radical-candor">Radical Candor: Be a Kickass Boss Without Losing Your Humanity</a>
+          <span class="by">by</span>
+          <span class="author">Kim Malone Scott</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1408839970"><a class="highlight" href="https://www.goodreads.com/book/show/25812847-the-silk-roads">The Silk Roads: A New History of the World</a>
+          <span class="by">by</span>
+          <span class="author">Peter Frankopan</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1489440658"><a class="highlight" href="https://www.goodreads.com/book/show/56592351-the-courage-to-be-disliked">The Courage to Be Disliked: How to Free Yourself, Change your Life and Achieve Real Happiness</a>
+          <span class="by">by</span>
+          <span class="author">Ichiro Kishimi</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/25230465-a-little-history-of-philosophy">A Little History of Philosophy</a>
+          <span class="by">by</span>
+          <span class="author">Nigel Warburton</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1784705373"><a class="highlight" href="https://www.goodreads.com/book/show/36114337-men-without-women">Men Without Women</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="0" data-isbn="340839937"><a class="highlight" href="https://www.goodreads.com/book/show/234225.Dune">Dune</a>
+          <span class="by">by</span>
+          <span class="author">Frank Herbert</span>
+        </li>
+      </ul>
+      <h2>2020</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="1936891026"><a class="highlight" href="https://www.goodreads.com/book/show/14653803-the-war-of-art">The War of Art: Break Through the Blocks and Win Your Inner Creative Battles</a>
+          <span class="by">by</span>
+          <span class="author">Steven Pressfield</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1472968115"><a class="highlight" href="https://www.goodreads.com/book/show/55032554-the-lost-art-of-running">The Lost Art of Running: A Journey to Rediscover the Forgotten Essence of Human Movement</a>
+          <span class="by">by</span>
+          <span class="author">Shane Benzie</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/50484473-lives-of-the-stoics">Lives of the Stoics: The Art of Living from Zeno to Marcus Aurelius</a>
+          <span class="by">by</span>
+          <span class="author">Ryan Holiday</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/9556.The_Elephant_Vanishes">The Elephant Vanishes</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="307593312"><a class="highlight" href="https://www.goodreads.com/book/show/10357575-1q84">1Q84</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1934964387"><a class="highlight" href="https://www.goodreads.com/book/show/7904429-scott-pilgrim-volume-6">Scott Pilgrim, Volume 6: Scott Pilgrim&amp;apos;s Finest Hour</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1934964107"><a class="highlight" href="https://www.goodreads.com/book/show/5989573-scott-pilgrim-volume-5">Scott Pilgrim, Volume 5: Scott Pilgrim vs. the Universe</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/29802.Scott_Pilgrim_Volume_3">Scott Pilgrim, Volume 3: Scott Pilgrim &amp;amp; The Infinite Sadness</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1932664491"><a class="highlight" href="https://www.goodreads.com/book/show/744615.Scott_Pilgrim_Volume_4">Scott Pilgrim, Volume 4: Scott Pilgrim Gets It Together</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1932664122"><a class="highlight" href="https://www.goodreads.com/book/show/29801.Scott_Pilgrim_vs_The_World">Scott Pilgrim vs. The World</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/29800.Scott_Pilgrim_s_Precious_Little_Life">Scott Pilgrim&amp;apos;s Precious Little Life</a>
+          <span class="by">by</span>
+          <span class="author">Bryan Lee O&amp;apos;Malley</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1910620610"><a class="highlight" href="https://www.goodreads.com/book/show/44511764-americana">Americana</a>
+          <span class="by">by</span>
+          <span class="author">Luke Healy</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="62258540"><a class="highlight" href="https://www.goodreads.com/book/show/17349252-thinking">Thinking: The New Science of Decision-Making, Problem-Solving, and Prediction</a>
+          <span class="by">by</span>
+          <span class="author">John Brockman</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1633690199"><a class="highlight" href="https://www.goodreads.com/book/show/23258980-on-emotional-intelligence">On Emotional Intelligence</a>
+          <span class="by">by</span>
+          <span class="author">Harvard Business Review</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1591843162"><a class="highlight" href="https://www.goodreads.com/book/show/7155145-linchpin">Linchpin: Are You Indispensable?</a>
+          <span class="by">by</span>
+          <span class="author">Seth Godin</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/49184235-haarkon-adventures">Haarkon Adventures: Japan</a>
+          <span class="by">by</span>
+          <span class="author">India Hobson</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1782116826"><a class="highlight" href="https://www.goodreads.com/book/show/28513813-reasons-to-stay-alive">Reasons to Stay Alive</a>
+          <span class="by">by</span>
+          <span class="author">Matt Haig</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="340960191"><a class="highlight" href="https://www.goodreads.com/book/show/25772375-dune">Dune</a>
+          <span class="by">by</span>
+          <span class="author">Frank Herbert</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1846275083"><a class="highlight" href="https://www.goodreads.com/book/show/18283207-strange-weather-in-tokyo">Strange Weather in Tokyo</a>
+          <span class="by">by</span>
+          <span class="author">Hiromi Kawakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="312863551"><a class="highlight" href="https://www.goodreads.com/book/show/349.The_Moon_is_a_Harsh_Mistress">The Moon is a Harsh Mistress</a>
+          <span class="by">by</span>
+          <span class="author">Robert A. Heinlein</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/40121378-atomic-habits">Atomic Habits: An Easy &amp;amp; Proven Way to Build Good Habits &amp;amp; Break Bad Ones</a>
+          <span class="by">by</span>
+          <span class="author">James Clear</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="321503627"><a class="highlight" href="https://www.goodreads.com/book/show/4268826-growing-object-oriented-software-guided-by-tests">Growing Object-Oriented Software, Guided by Tests</a>
+          <span class="by">by</span>
+          <span class="author">Steve Freeman</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1491973897"><a class="highlight" href="https://www.goodreads.com/book/show/33369254-the-manager-s-path">The Manager&amp;apos;s Path: A Guide for Tech Leaders Navigating Growth and Change</a>
+          <span class="by">by</span>
+          <span class="author">Camille Fournier</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1401229697"><a class="highlight" href="https://www.goodreads.com/book/show/8477057-daytripper">Daytripper</a>
+          <span class="by">by</span>
+          <span class="author">Fábio Moon</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="224096281"><a class="highlight" href="https://www.goodreads.com/book/show/16054793-the-gigantic-beard-that-was-evil">The Gigantic Beard that Was Evil</a>
+          <span class="by">by</span>
+          <span class="author">Stephen    Collins</span>
+        </li>
+      </ul>
+      <h2>2019</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="8117497"><a class="highlight" href="https://www.goodreads.com/book/show/31380440-foundation">Foundation</a>
+          <span class="by">by</span>
+          <span class="author">Isaac Asimov</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="552779180"><a class="highlight" href="https://www.goodreads.com/book/show/17119857-french-children-don-t-throw-food">French Children Don&amp;apos;t Throw Food</a>
+          <span class="by">by</span>
+          <span class="author">Pamela Druckerman</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="2374951235"><a class="highlight" href="https://www.goodreads.com/book/show/43253161-binge-watching-london">Binge Watching London</a>
+          <span class="by">by</span>
+          <span class="author">Marion Miclet</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="2374950964"><a class="highlight" href="https://www.goodreads.com/book/show/43253160-binge-watching-new-york">Binge Watching New York</a>
+          <span class="by">by</span>
+          <span class="author">Marion Miclet</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="552997048"><a class="highlight" href="https://www.goodreads.com/book/show/437143.A_Short_History_of_Nearly_Everything">A Short History of Nearly Everything</a>
+          <span class="by">by</span>
+          <span class="author">Bill Bryson</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/49974937-city-quitters">City Quitters: An Exploration of Post-Urban Life</a>
+          <span class="by">by</span>
+          <span class="author">Karen Rosenkranz</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/41014339-endure">Endure: Mind, Body, and the Curiously Elastic Limits of Human Performance</a>
+          <span class="by">by</span>
+          <span class="author">Alex  Hutchinson</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1783350512"><a class="highlight" href="https://www.goodreads.com/book/show/30832439-doing-good-better">Doing Good Better: Effective Altruism and a Radical New Way to Make a Difference</a>
+          <span class="by">by</span>
+          <span class="author">William MacAskill</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="307952207"><a class="highlight" href="https://www.goodreads.com/book/show/39665673-finding-ultra">Finding Ultra: Rejecting Middle Age, Becoming One of the World&amp;apos;s Fittest Men, and Discovering Myself</a>
+          <span class="by">by</span>
+          <span class="author">Rich Roll</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="525533346"><a class="highlight" href="https://www.goodreads.com/book/show/39071691-the-bullet-journal-method">The Bullet Journal Method: Track Your Past, Order Your Present, Plan Your Future</a>
+          <span class="by">by</span>
+          <span class="author">Ryder Carroll</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="141981806"><a class="highlight" href="https://www.goodreads.com/book/show/37857021-life-3-0">Life 3.0: Being Human in the Age of Artificial Intelligence</a>
+          <span class="by">by</span>
+          <span class="author">Max Tegmark</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="596518382"><a class="highlight" href="https://www.goodreads.com/book/show/5608045-apprenticeship-patterns">Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman</a>
+          <span class="by">by</span>
+          <span class="author">Hoover Dave</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1594488843"><a class="highlight" href="https://www.goodreads.com/book/show/6452796-drive">Drive: The Surprising Truth About What Motivates Us</a>
+          <span class="by">by</span>
+          <span class="author">Daniel H. Pink</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="525427570"><a class="highlight" href="https://www.goodreads.com/book/show/35696171-enlightenment-now">Enlightenment Now: The Case for Reason, Science, Humanism, and Progress</a>
+          <span class="by">by</span>
+          <span class="author">Steven Pinker</span>
+        </li>
+      </ul>
+      <h2>2018</h2>
+      <ul>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/31138556-homo-deus">Homo Deus: A History of Tomorrow</a>
+          <span class="by">by</span>
+          <span class="author">Yuval Noah Harari</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/23692271-sapiens">Sapiens: A Brief History of Humankind</a>
+          <span class="by">by</span>
+          <span class="author">Yuval Noah Harari</span>
+        </li>
+        <li class="book" data-rating="0"><a class="highlight" href="https://www.goodreads.com/book/show/463882.Why_s_Poignant_Guide_to_Ruby">Why&amp;apos;s &amp;amp;&amp;amp;#35;40;Poignant&amp;amp;&amp;amp;#35;41; Guide to Ruby</a>
+          <span class="by">by</span>
+          <span class="author">Why The Lucky Stiff</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1408833409"><a class="highlight" href="https://www.goodreads.com/book/show/17630734-eat-and-run">Eat and Run: My Unlikely Journey to Ultramarathon Greatness</a>
+          <span class="by">by</span>
+          <span class="author">Scott Jurek</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="140449337"><a class="highlight" href="https://www.goodreads.com/book/show/30659.Meditations">Meditations</a>
+          <span class="by">by</span>
+          <span class="author">Marcus Aurelius</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/32944584-suggestible-you">Suggestible You: The Curious Science of Your Brain&amp;apos;s Ability to Deceive, Transform, and Heal</a>
+          <span class="by">by</span>
+          <span class="author">Erik Vance</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="9724617904"><a class="highlight" href="https://www.goodreads.com/book/show/3599299-a-rapariga-que-inventou-um-sonho">A Rapariga que Inventou um Sonho</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="241968097"><a class="highlight" href="https://www.goodreads.com/book/show/23121747-the-man-in-the-high-castle">The Man in the High Castle</a>
+          <span class="by">by</span>
+          <span class="author">Philip K. Dick</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="749305770"><a class="highlight" href="https://www.goodreads.com/book/show/4871.The_Quick_And_Easy_Way_To_Effective_Speaking">The Quick And Easy Way To Effective Speaking</a>
+          <span class="by">by</span>
+          <span class="author">Dale Carnegie</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="66620996"><a class="highlight" href="https://www.goodreads.com/book/show/76865.Good_to_Great">Good to Great: Why Some Companies Make the Leap... and Others Don&amp;apos;t</a>
+          <span class="by">by</span>
+          <span class="author">Jim Collins</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="882681079"><a class="highlight" href="https://www.goodreads.com/book/show/4027039-do-you-really-need-eyeglasses">Do You Really Need Eyeglasses?</a>
+          <span class="by">by</span>
+          <span class="author">Marilyn B. Rosanes-Berrett</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="670014664"><a class="highlight" href="https://www.goodreads.com/book/show/18114120-thanks-for-the-feedback">Thanks for the Feedback: The Science and Art of Receiving Feedback Well</a>
+          <span class="by">by</span>
+          <span class="author">Douglas Stone</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/39165640-make">MAKE: Bootstrapper&amp;apos;s Handbook</a>
+          <span class="by">by</span>
+          <span class="author">Pieter Levels</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1594206279"><a class="highlight" href="https://www.goodreads.com/book/show/23453112-modern-romance">Modern Romance</a>
+          <span class="by">by</span>
+          <span class="author">Aziz Ansari</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1941815197"><a class="highlight" href="https://www.goodreads.com/book/show/25434430-kinfolk-volume-18">Kinfolk Volume 18: The Design Issue</a>
+          <span class="by">by</span>
+          <span class="author">Kinfolk Magazine</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="884271781"><a class="highlight" href="https://www.goodreads.com/book/show/113934.The_Goal">The Goal: A Process of Ongoing Improvement</a>
+          <span class="by">by</span>
+          <span class="author">Eliyahu M. Goldratt</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="62429671"><a class="highlight" href="https://www.goodreads.com/book/show/30317415-stealing-fire">Stealing Fire: How Silicon Valley, the Navy SEALs, and Maverick Scientists Are Revolutionizing the Way We Live and Work</a>
+          <span class="by">by</span>
+          <span class="author">Steven Kotler</span>
+        </li>
+        <li class="book" data-rating="0" data-isbn="143037536"><a class="highlight" href="https://www.goodreads.com/book/show/96987.The_Symposium">The Symposium</a>
+          <span class="by">by</span>
+          <span class="author">Plato</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="62414852"><a class="highlight" href="https://www.goodreads.com/book/show/25817538-the-happiness-project">The Happiness Project: Or, Why I Spent a Year Trying to Sing in the Morning, Clean My Closets, Fight Right, Read Aristotle, and Generally Have More Fun</a>
+          <span class="by">by</span>
+          <span class="author">Gretchen Rubin</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="99322617"><a class="highlight" href="https://www.goodreads.com/book/show/826531.Zen_and_the_Art_of_Motorcycle_Maintenance">Zen and the Art of Motorcycle Maintenance</a>
+          <span class="by">by</span>
+          <span class="author">Robert M. Pirsig</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="1594861994"><a class="highlight" href="https://www.goodreads.com/book/show/120244.Marathon">Marathon: The Ultimate Training Guide</a>
+          <span class="by">by</span>
+          <span class="author">Hal Higdon</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="62301233"><a class="highlight" href="https://www.goodreads.com/book/show/25541028-elon-musk">Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future</a>
+          <span class="by">by</span>
+          <span class="author">Ashlee Vance</span>
+        </li>
+      </ul>
+      <h2>2017</h2>
+      <ul>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/8622761-hacking-work">Hacking Work: Breaking Stupid Rules for Smart Results</a>
+          <span class="by">by</span>
+          <span class="author">Bill Jensen</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/29093292-the-daily-stoic">The Daily Stoic: 366 Meditations on Wisdom, Perseverance, and the Art of Living</a>
+          <span class="by">by</span>
+          <span class="author">Ryan Holiday</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/28257707-the-subtle-art-of-not-giving-a-f-ck">The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life</a>
+          <span class="by">by</span>
+          <span class="author">Mark Manson</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1591844568"><a class="highlight" href="https://www.goodreads.com/book/show/11910905-the-charisma-myth">The Charisma Myth: How Anyone Can Master the Art and Science of Personal Magnetism</a>
+          <span class="by">by</span>
+          <span class="author">Olivia Fox Cabane</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1591846358"><a class="highlight" href="https://www.goodreads.com/book/show/18668059-the-obstacle-is-the-way">The Obstacle Is the Way: The Timeless Art of Turning Trials into Triumph</a>
+          <span class="by">by</span>
+          <span class="author">Ryan Holiday</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="241145473"><a class="highlight" href="https://www.goodreads.com/book/show/27845690-the-course-of-love">The Course of Love</a>
+          <span class="by">by</span>
+          <span class="author">Alain de Botton</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/12189232-a-pr-tica-do-poder-do-agora">A Prática do Poder do Agora</a>
+          <span class="by">by</span>
+          <span class="author">Eckhart Tolle</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/5487765-97-things-every-software-architect-should-know">97 Things Every Software Architect Should Know</a>
+          <span class="by">by</span>
+          <span class="author">Richard Monson-Haefel</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1585424803"><a class="highlight" href="https://www.goodreads.com/book/show/87632.Ultramarathon_Man">Ultramarathon Man: Confessions of an All-Night Runner</a>
+          <span class="by">by</span>
+          <span class="author">Dean Karnazes</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="99591898"><a class="highlight" href="https://www.goodreads.com/book/show/26046314-the-four-dimensional-human">The Four-Dimensional Human: Ways of Being in the Digital World</a>
+          <span class="by">by</span>
+          <span class="author">Laurence Scott</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="983162999"><a class="highlight" href="https://www.goodreads.com/book/show/17787448-pretty-good-number-one">Pretty Good Number One: An American Family Eats Tokyo</a>
+          <span class="by">by</span>
+          <span class="author">Matthew Amster-Burton</span>
+        </li>
+      </ul>
+      <h2>2016</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="571227678"><a class="highlight" href="https://www.goodreads.com/book/show/144679.Lord_of_the_Flies">Lord of the Flies</a>
+          <span class="by">by</span>
+          <span class="author">William Golding</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="60929871"><a class="highlight" href="https://www.goodreads.com/book/show/5129.Brave_New_World">Brave New World</a>
+          <span class="by">by</span>
+          <span class="author">Aldous Huxley</span>
+        </li>
+        <li class="book" data-rating="0"><a class="highlight" href="https://www.goodreads.com/book/show/5470.1984">1984</a>
+          <span class="by">by</span>
+          <span class="author">George Orwell</span>
+        </li>
+        <li class="book" data-rating="0"><a class="highlight" href="https://www.goodreads.com/book/show/4865.How_to_Win_Friends_Influence_People">How to Win Friends &amp;amp; Influence People</a>
+          <span class="by">by</span>
+          <span class="author">Dale Carnegie</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="691144052"><a class="highlight" href="https://www.goodreads.com/book/show/17847848-the-new-york-nobody-knows">The New York Nobody Knows: Walking 6,000 Miles in the City</a>
+          <span class="by">by</span>
+          <span class="author">William B. Helmreich</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="262527804"><a class="highlight" href="https://www.goodreads.com/book/show/26017445-the-technological-singularity">The Technological Singularity</a>
+          <span class="by">by</span>
+          <span class="author">Murray Shanahan</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1590304489"><a class="highlight" href="https://www.goodreads.com/book/show/336889.The_Art_of_Peace">The Art of Peace</a>
+          <span class="by">by</span>
+          <span class="author">Morihei Ueshiba</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1101651180"><a class="highlight" href="https://www.goodreads.com/book/show/19306665-on-the-shortness-of-life">On the Shortness of Life</a>
+          <span class="by">by</span>
+          <span class="author">Seneca</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="9722332252"><a class="highlight" href="https://www.goodreads.com/book/show/6569293-o-cavaleiro-da-armadura-enferrujada">O Cavaleiro da Armadura Enferrujada</a>
+          <span class="by">by</span>
+          <span class="author">Robert    Fisher</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/28951428-radical-focus">Radical Focus : Achieving Your Most Important Goals with Objectives and Key Results</a>
+          <span class="by">by</span>
+          <span class="author">Christina Wodtke</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1411673360"><a class="highlight" href="https://www.goodreads.com/book/show/1181646.How_to_Be_a_3_Man_Winning_the_Heart_of_the_Woman_of_Your_Dreams">How to Be a 3% Man, Winning the Heart of the Woman of Your Dreams</a>
+          <span class="by">by</span>
+          <span class="author">Corey Wayne</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1607747308"><a class="highlight" href="https://www.goodreads.com/book/show/22318578-the-life-changing-magic-of-tidying-up">The Life-Changing Magic of Tidying Up: The Japanese Art of Decluttering and Organizing</a>
+          <span class="by">by</span>
+          <span class="author">Marie Kondō</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/10374.Hard_Boiled_Wonderland_and_the_End_of_the_World">Hard-Boiled Wonderland and the End of the World</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="9724616924"><a class="highlight" href="https://www.goodreads.com/book/show/4597289-cr-nica-do-p-ssaro-de-corda">Crónica do Pássaro de Corda</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="195374614"><a class="highlight" href="https://www.goodreads.com/book/show/5617966-a-guide-to-the-good-life">A Guide to the Good Life: The Ancient Art of Stoic Joy</a>
+          <span class="by">by</span>
+          <span class="author">William B. Irvine</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="753820161"><a class="highlight" href="https://www.goodreads.com/book/show/1068674.Meditations">Meditations</a>
+          <span class="by">by</span>
+          <span class="author">Marcus Aurelius</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="374275637"><a class="highlight" href="https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow">Thinking, Fast and Slow</a>
+          <span class="by">by</span>
+          <span class="author">Daniel Kahneman</span>
+        </li>
+      </ul>
+      <h2>2015</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="385354304"><a class="highlight" href="https://www.goodreads.com/book/show/23128304-the-strange-library">The Strange Library</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/13640447-after-dark">After Dark</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="817936920"><a class="highlight" href="https://www.goodreads.com/book/show/196158.Courage_Under_Fire">Courage Under Fire: Testing Epictetus&amp;apos;s Doctrines in a Laboratory of Human Behavior</a>
+          <span class="by">by</span>
+          <span class="author">James B. Stockdale</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/22299976-the-bulletproof-diet">The Bulletproof Diet: Lose up to a Pound a Day, Reclaim Energy and Focus, Upgrade Your Life</a>
+          <span class="by">by</span>
+          <span class="author">Dave Asprey</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="8579623758"><a class="highlight" href="https://www.goodreads.com/book/show/24927406-sono">Sono</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="141184388"><a class="highlight" href="https://www.goodreads.com/book/show/873273.Down_and_Out_in_Paris_and_London">Down and Out in Paris and London</a>
+          <span class="by">by</span>
+          <span class="author">George Orwell</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="553385534"><a class="highlight" href="https://www.goodreads.com/book/show/3960300-full-dark-house">Full Dark House</a>
+          <span class="by">by</span>
+          <span class="author">Christopher Fowler</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="201835959"><a class="highlight" href="https://www.goodreads.com/book/show/13629.The_Mythical_Man_Month">The Mythical Man-Month: Essays on Software Engineering</a>
+          <span class="by">by</span>
+          <span class="author">Frederick P. Brooks Jr.</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="375704027"><a class="highlight" href="https://www.goodreads.com/book/show/11297.Norwegian_Wood">Norwegian Wood</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/35214.How_To_Talk_To_Anyone">How To Talk To Anyone: 92 Little Tricks for Big Success in Relationships</a>
+          <span class="by">by</span>
+          <span class="author">Leil Lowndes</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="393351378"><a class="highlight" href="https://www.goodreads.com/book/show/23261448-the-science-of-interstellar">The Science of Interstellar</a>
+          <span class="by">by</span>
+          <span class="author">Kip S. Thorne</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="500273588"><a class="highlight" href="https://www.goodreads.com/book/show/2763146-design-for-the-real-world">Design for the Real World: Human Ecology and Social Change</a>
+          <span class="by">by</span>
+          <span class="author">Victor Papanek</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="99448475"><a class="highlight" href="https://www.goodreads.com/book/show/9557.Sputnik_Sweetheart">Sputnik Sweetheart</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+      </ul>
+      <h2>2014</h2>
+      <ul>
+        <li class="book" data-rating="5" data-isbn="141036141"><a class="highlight" href="https://www.goodreads.com/book/show/3744438-1984">1984</a>
+          <span class="by">by</span>
+          <span class="author">George Orwell</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/21747642-what-i-talk-about-when-i-talk-about-running">What I Talk About When I Talk About Running</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1603866035"><a class="highlight" href="https://www.goodreads.com/book/show/18642064-my-inventions">My Inventions: The Autobiography of Nikola Tesla</a>
+          <span class="by">by</span>
+          <span class="author">Nikola Tesla</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="486290301"><a class="highlight" href="https://www.goodreads.com/book/show/7724.The_Metamorphosis_and_Other_Stories">The Metamorphosis and Other Stories</a>
+          <span class="by">by</span>
+          <span class="author">Franz Kafka</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="91929113"><a class="highlight" href="https://www.goodreads.com/book/show/9278897-the-4-hour-work-week">The 4-Hour Work Week: Escape the 9-5, Live Anywhere and Join the New Rich</a>
+          <span class="by">by</span>
+          <span class="author">Timothy Ferriss</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="738203556"><a class="highlight" href="https://www.goodreads.com/book/show/56009.Recollections">Recollections: An Autobiography</a>
+          <span class="by">by</span>
+          <span class="author">Viktor E. Frankl</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1846684226"><a class="highlight" href="https://www.goodreads.com/book/show/20998547-born-to-run">Born to Run</a>
+          <span class="by">by</span>
+          <span class="author">Christopher McDougall</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1908005475"><a class="highlight" href="https://www.goodreads.com/book/show/16621634-einstein-the-art-of-mindful-cycling">Einstein &amp;amp; The Art of Mindful Cycling: Achieving Balance in the Modern World</a>
+          <span class="by">by</span>
+          <span class="author">Ben Irvine</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/11810972-flatland">Flatland: A Romance of Many Dimensions</a>
+          <span class="by">by</span>
+          <span class="author">Edwin A. Abbott</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="981162614"><a class="highlight" href="https://www.goodreads.com/book/show/7960470-the-art-of-war">The Art of War</a>
+          <span class="by">by</span>
+          <span class="author">Sun Tzu</span>
+        </li>
+        <li class="book" data-rating="3" data-isbn="486132536"><a class="highlight" href="https://www.goodreads.com/book/show/19747599-walden-or-life-in-the-woods">Walden; Or, Life in the Woods</a>
+          <span class="by">by</span>
+          <span class="author">Henry David Thoreau</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="91906814"><a class="highlight" href="https://www.goodreads.com/book/show/33288.How_To_Win_Friends_Influence_People">How To Win Friends &amp;amp; Influence People</a>
+          <span class="by">by</span>
+          <span class="author">Dale Carnegie</span>
+        </li>
+      </ul>
+      <h2>2013</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="71410945"><a class="highlight" href="https://www.goodreads.com/book/show/534755.A_Technique_for_Producing_Ideas">A Technique for Producing Ideas</a>
+          <span class="by">by</span>
+          <span class="author">James Webb Young</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="931137071"><a class="highlight" href="https://www.goodreads.com/book/show/265456.The_Tao_of_Programming">The Tao of Programming</a>
+          <span class="by">by</span>
+          <span class="author">Geoffrey James</span>
+        </li>
+        <li class="book" data-rating="4"><a class="highlight" href="https://www.goodreads.com/book/show/2432983.Siddhartha">Siddhartha</a>
+          <span class="by">by</span>
+          <span class="author">Hermann Hesse</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="1590304063"><a class="highlight" href="https://www.goodreads.com/book/show/409890.What_Makes_You_Not_a_Buddhist">What Makes You Not a Buddhist</a>
+          <span class="by">by</span>
+          <span class="author">Dzongsar Jamyang Khyentse</span>
+        </li>
+        <li class="book" data-rating="3"><a class="highlight" href="https://www.goodreads.com/book/show/3606771-kafka-beira-mar">Kafka à Beira-Mar</a>
+          <span class="by">by</span>
+          <span class="author">Haruki Murakami</span>
+        </li>
+      </ul>
+      <h2>2012</h2>
+      <ul>
+        <li class="book" data-rating="4" data-isbn="1452101655"><a class="highlight" href="https://www.goodreads.com/book/show/12803534-beard">Beard</a>
+          <span class="by">by</span>
+          <span class="author">Matthew Rainwaters</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/13497.A_Feast_for_Crows">A Feast for Crows</a>
+          <span class="by">by</span>
+          <span class="author">George R.R. Martin</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/62291.A_Storm_of_Swords">A Storm of Swords</a>
+          <span class="by">by</span>
+          <span class="author">George R.R. Martin</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/10664113-a-dance-with-dragons">A Dance with Dragons</a>
+          <span class="by">by</span>
+          <span class="author">George R.R. Martin</span>
+        </li>
+        <li class="book" data-rating="5"><a class="highlight" href="https://www.goodreads.com/book/show/2102001.The_Game">The Game</a>
+          <span class="by">by</span>
+          <span class="author">Neil Strauss</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="757000266"><a class="highlight" href="https://www.goodreads.com/book/show/137639.Bushido">Bushido: The Way of the Samurai</a>
+          <span class="by">by</span>
+          <span class="author">Yamamoto Tsunetomo</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="1594488010"><a class="highlight" href="https://www.goodreads.com/book/show/9378733-the-psychopath-test">The Psychopath Test: A Journey Through the Madness Industry</a>
+          <span class="by">by</span>
+          <span class="author">Jon Ronson</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="4770029160"><a class="highlight" href="https://www.goodreads.com/book/show/277950.Hagakure">Hagakure: The Book of the Samurai</a>
+          <span class="by">by</span>
+          <span class="author">Yamamoto Tsunetomo</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="714863483"><a class="highlight" href="https://www.goodreads.com/book/show/12859410-damn-good-advice-for-people-with-talent">Damn Good Advice &amp;amp;&amp;amp;#35;40;For People with Talent!&amp;amp;&amp;amp;#35;41;: How To Unleash Your Creative Potential by America&amp;apos;s Master Communicator, George Lois</a>
+          <span class="by">by</span>
+          <span class="author">George Lois</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="307463745"><a class="highlight" href="https://www.goodreads.com/book/show/6732019-rework">Rework</a>
+          <span class="by">by</span>
+          <span class="author">Jason Fried</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="879804211"><a class="highlight" href="https://www.goodreads.com/book/show/102328.The_Knight_in_Rusty_Armor">The Knight in Rusty Armor</a>
+          <span class="by">by</span>
+          <span class="author">Robert    Fisher</span>
+        </li>
+        <li class="book" data-rating="4" data-isbn="964729237"><a class="highlight" href="https://www.goodreads.com/book/show/1812457.The_Shack">The Shack</a>
+          <span class="by">by</span>
+          <span class="author">William Paul Young</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="465067107"><a class="highlight" href="https://www.goodreads.com/book/show/840.The_Design_of_Everyday_Things">The Design of Everyday Things</a>
+          <span class="by">by</span>
+          <span class="author">Donald A. Norman</span>
+        </li>
+      </ul>
+      <h2>2011</h2>
+      <ul>
+        <li class="book" data-rating="5" data-isbn="553588486"><a class="highlight" href="https://www.goodreads.com/book/show/13496.A_Game_of_Thrones">A Game of Thrones</a>
+          <span class="by">by</span>
+          <span class="author">George R.R. Martin</span>
+        </li>
+        <li class="book" data-rating="5" data-isbn="553381695"><a class="highlight" href="https://www.goodreads.com/book/show/10572.A_Clash_of_Kings">A Clash of Kings</a>
+          <span class="by">by</span>
+          <span class="author">George R.R. Martin</span>
+        </li>
+      </ul>
+      <h2>2004</h2>
+      <ul>
+        <li class="book" data-rating="5" data-isbn="9721040983"><a class="highlight" href="https://www.goodreads.com/book/show/6184141-o-triunfo-dos-porcos">O Triunfo dos Porcos</a>
+          <span class="by">by</span>
+          <span class="author">George Orwell</span>
+        </li>
+      </ul>
+      <section class="footnotes">
+        <p id="fn1"><a class="footnotes__link" href="#r1">[1]</a>
+          Read or listened; audiobooks are great companions for long runs
+          and I find them in some ways superior to paper books.
+        </p>
+      </section>
+    </main>
+    <footer class="footer"><a class="footer__link" href="https://blog.gnclmorais.com">Blog</a>,
+      <a class="footer__link" href="https://github.com/gnclmorais">GitHub</a>,
+      <a class="footer__link" href="https://twitter.com/gnclmorais">Twitter</a><a class="footer__link pull-right" href="https://github.com/gnclmorais/bookshelf">Check out the code</a>
+    </footer>
+  </body>
+</html>
