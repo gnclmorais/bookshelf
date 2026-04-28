@@ -1,6 +1,6 @@
 {
   "name": "bookshelf",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "What I’ve read so far.",
   "main": "index.js",
   "scripts": {

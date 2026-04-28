@@ -7,6 +7,35 @@ const pug = require('pug')
 const R = require('ramda')
 const fs = require('fs')
 
+// Decode HTML entities
+const decodeHtmlEntities = (str) => {
+  if (typeof str !== 'string') return str
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec))
+    .replace(/&#x([0-9a-f]+);/gi, (match, hex) => String.fromCharCode(parseInt(hex, 16)))
+}
+
+// Recursively decode HTML entities in an object
+const decodeObject = (obj) => {
+  if (typeof obj === 'string') {
+    return decodeHtmlEntities(obj)
+  } else if (Array.isArray(obj)) {
+    return obj.map(decodeObject)
+  } else if (typeof obj === 'object' && obj !== null) {
+    const decoded = {}
+    for (const key in obj) {
+      decoded[key] = decodeObject(obj[key])
+    }
+    return decoded
+  }
+  return obj
+}
+
 // 'Get the books on a members shelf'
 // https://goodreads.com/api/index#reviews.list
 
@@ -43,6 +72,7 @@ const goodreadsUrlShelf = 'https://www.goodreads.com/review/list'
       }).accept('xml')
 
       body = JSON.parse(parser.toJson(res.body.toString('utf8')))
+      body = decodeObject(body)
       response = body.GoodreadsResponse
 
       shelf = response.reviews
