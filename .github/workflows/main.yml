@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use latest Node.js LTS
+    - name: Use Node.js from .nvmrc
       uses: actions/setup-node@v4
       with:
-        node-version: 'lts/*'
+        node-version-file: '.nvmrc'
     - run: npm install
     - run: npm run build --if-present
     - name: Creates a bookshelf based on Goodreads data
